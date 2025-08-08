@@ -1,0 +1,360 @@
+{
+  "name": "My workflow 3",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.dateTime",
+      "typeVersion": 2,
+      "position": [
+        208,
+        0
+      ],
+      "id": "2c3c55ef-2f15-4cbc-aa9b-c999d22f4cd0",
+      "name": "Date & Time"
+    },
+    {
+      "parameters": {
+        "operation": "formatDate",
+        "date": "={{ $json.currentDate }}",
+        "format": "custom",
+        "customFormat": "dd-MM",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.dateTime",
+      "typeVersion": 2,
+      "position": [
+        416,
+        0
+      ],
+      "id": "608333b7-caf7-4d06-ac79-f39c061b5591",
+      "name": "Date & Time1"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1I8Rl-bIRlzcT7Q-lESZqGgmhUj9R06RRhuywLjdjI20",
+          "mode": "list",
+          "cachedResultName": "Birthday_List",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1I8Rl-bIRlzcT7Q-lESZqGgmhUj9R06RRhuywLjdjI20/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1I8Rl-bIRlzcT7Q-lESZqGgmhUj9R06RRhuywLjdjI20/edit#gid=0"
+        },
+        "filtersUI": {
+          "values": [
+            {
+              "lookupColumn": "Date to reminder",
+              "lookupValue": "={{ $json.formattedDate }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.6,
+      "position": [
+        624,
+        0
+      ],
+      "id": "30a91bd9-6c41-4a51-86d5-2db2573270a7",
+      "name": "Get row(s) in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "dy1RUB3lWl2Ti9kP",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "language": "python",
+        "pythonCode": "from datetime import datetime, timedelta\n\n# Step 1: Get contacts from previous node\ncontacts = [item[\"json\"] for item in items]\n\n# Step 2: Get tomorrow's date in dd-mm format\ntomorrow = datetime.now() + timedelta(days=1)\nstr_tomorrow_md = tomorrow.strftime(\"%d-%m\")\n\n# Step 3: Prepare list for matches\nbirthday_contacts = []\n\n# Step 4: Loop through each contact and match\nfor contact in contacts:\n    dob_raw = contact.get(\"Date of Birth\", \"\").strip().replace(\".\", \"-\").replace(\"/\", \"-\")\n    name = contact.get(\"Name\", \"\").strip()\n\n    if dob_raw == str_tomorrow_md:\n        birthday_contacts.append({\n            \"Name\": name,\n            \"Date of Birth\": dob_raw,\n            \"Date to reminder\": datetime.now().strftime(\"%d-%m\"),\n            \"message\": f\"🎉 Reminder: {name} has a birthday tomorrow!\"\n        })\n\n# Step 5: Return in required format\nreturn [{\n    \"json\": {\n        \"birthday_contacts\": birthday_contacts\n    }\n}]\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1040,
+        0
+      ],
+      "id": "61693193-e7ac-4660-90f5-ddfdc3fd2401",
+      "name": "Code"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "b7cd7acb-a398-4b58-bd6c-e54427aa94a6",
+              "leftValue": "{{ $json.birthday_contacts }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        1248,
+        0
+      ],
+      "id": "c2bf1021-3de8-4f66-8bfe-c7f0141cdf3f",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "Name, Date to reminder , Date of Birth",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        832,
+        0
+      ],
+      "id": "65ca47a2-9727-4a68-81bc-1867298beae3",
+      "name": "Split Out"
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "birthday_contacts",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        1456,
+        -96
+      ],
+      "id": "634dd3d5-9f38-41d9-8d27-5c04f561c4ec",
+      "name": "Split Out1"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Name: {{ $json.Name }}\ntime_to_birthday: {{ $json.time_to_birthday }}\nDate of Birth: {{ $json[\"Date of Birth\"] }}\nMessage: {{ $json.message }}\n\n\n",
+        "options": {
+          "systemMessage": "You are a birthday reminder agent.\nYou are provided with details including the person's name, age, time_to_birthday, and any additional notes.\nYour task is to generate a short and friendly reminder message for each person.\n\nIf it's the person's birthday today or tomorrow, mention that.\n\nIf additional info is available, briefly include it to help the user personalize their wishes.\n\nImportant: Only return the final output as reminder message. No extra formatting, explanation, or headers.\n\n\n"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        1664,
+        -96
+      ],
+      "id": "58b87853-52b4-4c66-94a4-d9686ced3c22",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "model": "deepseek/deepseek-r1:free",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
+      "typeVersion": 1,
+      "position": [
+        1536,
+        112
+      ],
+      "id": "e0482a74-3c82-408c-b77c-3a782af3a277",
+      "name": "OpenRouter Chat Model",
+      "credentials": {
+        "openRouterApi": {
+          "id": "PVheMoo5JDOlqYfD",
+          "name": "OpenRouter account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "858587473",
+        "text": "={{ $json.output }}",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        2016,
+        -96
+      ],
+      "id": "6499f116-8aca-4f0f-8581-81b89e7dd5c9",
+      "name": "Send a text message",
+      "webhookId": "2cf19448-7cba-49ea-a294-dda4bbd7ae16",
+      "credentials": {
+        "telegramApi": {
+          "id": "SgkYIW27f1SNGXnl",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "triggerAtHour": 3,
+              "triggerAtMinute": 15
+            },
+            {
+              "triggerAtHour": 2
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        -48,
+        0
+      ],
+      "id": "0f4de5a5-8c0c-4bc9-872f-26ede60b6ba8",
+      "name": "Schedule Trigger1"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Date & Time": {
+      "main": [
+        [
+          {
+            "node": "Date & Time1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Date & Time1": {
+      "main": [
+        [
+          {
+            "node": "Get row(s) in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get row(s) in sheet": {
+      "main": [
+        [
+          {
+            "node": "Split Out",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Out": {
+      "main": [
+        [
+          {
+            "node": "Code",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Split Out1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Out1": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenRouter Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Send a text message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Schedule Trigger1": {
+      "main": [
+        [
+          {
+            "node": "Date & Time",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "1c387bc4-a30d-4838-a8b7-8196632fd562",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "e22a4a044d2b6a96f0e19ff6a2742d2598a60cf5fecd73f9173bdf85693ddc7a"
+  },
+  "id": "l8HwHUcLhpws9h8A",
+  "tags": []
+}
