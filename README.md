@@ -1,4 +1,4 @@
-# 🎂 BdayNotifier – Birthday Reminder via Telegram using n8n
+# BdayNotifier – Birthday Reminder via Telegram using n8n
 
 **BdayNotifier** is a smart, automated workflow built using [n8n](https://n8n.io/) that reminds you of birthdays **1 day in advance**, sending messages directly to your **Telegram bot**.
 
@@ -109,7 +109,10 @@ Here’s how the n8n workflow looks in action:
 
 ## 🎥 Working Demo Video
 
-▶ **[Watch on YouTube](https://youtu.be/vLQZUSjxpXA)**
+Watch the final demonstration of the BdayNotifier project here:
+[![Demo Video](https://img.youtube.com/vi/vLQZUSjxpXA/0.jpg)](https://youtu.be/vLQZUSjxpXA)
+
+Or click this link: [https://youtu.be/vLQZUSjxpXA](https://youtu.be/vLQZUSjxpXA)
 
 ---
 
@@ -134,3 +137,4 @@ Created by \[M.Thiruvarankan]
 
 ---
 
+If you want, I can also make a **GitHub-friendly collapsible section** for the screenshots and video so the README looks cleaner. That would make it look more professional and less crowded.
