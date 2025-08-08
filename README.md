@@ -8,11 +8,11 @@ No more forgetting birthdays – let your bot keep you updated and ready to send
 
 ## 📌 Features
 
-- ⏰ **Daily Scheduled Checks**  
-- 📄 **Google Sheets Integration**  
-- 🧠 **AI-Powered Personalized Messages**  
-- 🤖 **Telegram Message Delivery**  
-- ⚙️ **Fully Customizable & Extendable**
+* ⏰ **Daily Scheduled Checks**
+* 📄 **Google Sheets Integration**
+* 🧠 **AI-Powered Personalized Messages**
+* 🤖 **Telegram Message Delivery**
+* ⚙️ **Fully Customizable & Extendable**
 
 ---
 
@@ -21,17 +21,18 @@ No more forgetting birthdays – let your bot keep you updated and ready to send
 Make sure your Google Sheet (named `Birthday_List`) follows this format:
 
 | Name          | Date to reminder | Date of Birth |
-|---------------|------------------|----------------|
-| Arushan       | 09-04            | 10-04          |
-| Kugaparan     | 29-05            | 30-05          |
-| Thiruvarankan | 07-07            | 08-07          |
-| Abisan        | 08-08            | 09-08          |
-| Changeethan   | 08-08            | 09-08          |
-| Kopithan      | 09-08            | 10-08          |
+| ------------- | ---------------- | ------------- |
+| Arushan       | 09-04            | 10-04         |
+| Kugaparan     | 29-05            | 30-05         |
+| Thiruvarankan | 07-07            | 08-07         |
+| Abisan        | 08-08            | 09-08         |
+| Changeethan   | 08-08            | 09-08         |
+| Kopithan      | 09-08            | 10-08         |
 
 📝 **Notes**:
-- Dates should be in `dd-MM` format (without year).
-- “Date to reminder” must be **one day before** the actual birthday.
+
+* Dates should be in `dd-MM` format (without year).
+* “Date to reminder” must be **one day before** the actual birthday.
 
 ---
 
@@ -53,7 +54,7 @@ Make sure your Google Sheet (named `Birthday_List`) follows this format:
 
 ```bash
 git clone https://github.com/yourusername/BdayNotifier.git
-````
+```
 
 ### 2. Import the Workflow into n8n
 
@@ -98,9 +99,17 @@ You can easily adapt this workflow to:
 
 ---
 
-## 📸 Screenshots (Optional)
+## 📸 Screenshots
 
-*Add screenshots of your n8n workflow here to visually show how it works.*
+Here’s how the n8n workflow looks in action:
+
+![BdayNotifier Workflow](https://example.com/your-screenshot.png)
+
+---
+
+## 🎥 Working Demo Video
+
+▶ **[Watch on YouTube](https://youtube.com/your-demo-link)**
 
 ---
 
@@ -123,5 +132,5 @@ Free to use, share, and modify!
 Created by \[M.Thiruvarankan]
 🔗 Powered by [n8n.io](https://n8n.io), [OpenRouter.ai](https://openrouter.ai), and [Telegram Bot API](https://core.telegram.org/bots/api)
 
-```
+---
 
