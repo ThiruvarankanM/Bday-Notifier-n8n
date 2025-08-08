@@ -109,7 +109,7 @@ Here’s how the n8n workflow looks in action:
 
 ## 🎥 Working Demo Video
 
-▶ **[Watch on YouTube](https://youtube.com/your-demo-link)**
+▶ **[Watch on YouTube](https://youtu.be/vLQZUSjxpXA)**
 
 ---
 
