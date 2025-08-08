@@ -103,7 +103,7 @@ You can easily adapt this workflow to:
 
 Here’s how the n8n workflow looks in action:
 
-![BdayNotifier Workflow](https://example.com/your-screenshot.png)
+![BdayNotifier Workflow](https://github.com/ThiruvarankanM/Bday-Notifier-n8n/blob/38b14059729e06448a3eb149734d07a29bc9e158/N8N_Workflow.png)
 
 ---
 
