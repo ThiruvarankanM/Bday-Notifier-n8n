@@ -135,6 +135,3 @@ Free to use, share, and modify!
 Created by \[M.Thiruvarankan]
 🔗 Powered by [n8n.io](https://n8n.io), [OpenRouter.ai](https://openrouter.ai), and [Telegram Bot API](https://core.telegram.org/bots/api)
 
----
-
-If you want, I can also make a **GitHub-friendly collapsible section** for the screenshots and video so the README looks cleaner. That would make it look more professional and less crowded.
