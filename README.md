@@ -1,18 +1,18 @@
 # BdayNotifier – Birthday Reminder via Telegram using n8n
 
-**BdayNotifier** is a smart, automated workflow built using [n8n](https://n8n.io/) that reminds you of birthdays **1 day in advance**, sending messages directly to your **Telegram bot**.
+**BdayNotifier** is an automated workflow built using [n8n](https://n8n.io/) that reminds you of birthdays **1 day in advance**, sending messages directly to your **Telegram bot**.
 
-No more forgetting birthdays – let your bot keep you updated and ready to send your wishes 🎉
+No more forgetting birthdays – let your bot keep you updated and ready to send your wishes.  
 
 ---
 
 ## 📌 Features
 
-* ⏰ **Daily Scheduled Checks**
-* 📄 **Google Sheets Integration**
-* 🧠 **AI-Powered Personalized Messages**
-* 🤖 **Telegram Message Delivery**
-* ⚙️ **Fully Customizable & Extendable**
+- Daily Scheduled Checks  
+- Google Sheets Integration  
+- AI-Powered Personalized Messages  
+- Telegram Message Delivery  
+- Fully Customizable & Extendable  
 
 ---
 
@@ -29,22 +29,21 @@ Make sure your Google Sheet (named `Birthday_List`) follows this format:
 | Changeethan   | 08-08            | 09-08         |
 | Kopithan      | 09-08            | 10-08         |
 
-📝 **Notes**:
-
-* Dates should be in `dd-MM` format (without year).
-* “Date to reminder” must be **one day before** the actual birthday.
+**Notes**:  
+- Dates should be in `dd-MM` format (without year).  
+- “Date to reminder” must be one day before the actual birthday.  
 
 ---
 
 ## 🔄 How It Works (Workflow Logic)
 
-1. **Schedule Trigger** – Runs automatically every day at 2:00 AM & 3:15 AM.
-2. **Date Formatting** – Fetches and formats today’s date as `dd-MM`.
-3. **Google Sheets Lookup** – Matches today's date with the "Date to reminder" column.
-4. **Python Filtering** – Confirms if the birthday falls tomorrow (based on "Date of Birth").
-5. **Condition Check** – If matches are found, proceed; otherwise, stop.
-6. **AI Message Generation** – Uses an OpenRouter-powered AI agent to create a custom message.
-7. **Telegram Notification** – Sends the generated message directly to your Telegram account.
+1. **Schedule Trigger** – Runs automatically every day at 2:00 AM & 3:15 AM.  
+2. **Date Formatting** – Fetches and formats today’s date as `dd-MM`.  
+3. **Google Sheets Lookup** – Matches today's date with the "Date to reminder" column.  
+4. **Python Filtering** – Confirms if the birthday falls tomorrow (based on "Date of Birth").  
+5. **Condition Check** – If matches are found, proceed; otherwise, stop.  
+6. **AI Message Generation** – Uses an OpenRouter-powered AI agent to create a custom message.  
+7. **Telegram Notification** – Sends the generated message directly to your Telegram account.  
 
 ---
 
@@ -54,7 +53,7 @@ Make sure your Google Sheet (named `Birthday_List`) follows this format:
 
 ```bash
 git clone https://github.com/yourusername/BdayNotifier.git
-```
+````
 
 ### 2. Import the Workflow into n8n
 
@@ -81,11 +80,11 @@ Ensure your sheet is:
 
 ## 🧠 Tech Stack
 
-* 🔄 **n8n** – Workflow automation
-* 🐍 **Python** – For logic and date parsing
-* 📄 **Google Sheets** – Data source
-* 🧠 **OpenRouter AI** – Custom message generation
-* 🤖 **Telegram Bot API** – For reminders
+* **n8n** – Workflow automation
+* **Python** – For logic and date parsing
+* **Google Sheets** – Data source
+* **OpenRouter AI** – Custom message generation
+* **Telegram Bot API** – For reminders
 
 ---
 
@@ -119,19 +118,21 @@ Or click this link: [https://youtu.be/vLQZUSjxpXA](https://youtu.be/vLQZUSjxpXA)
 ## 📄 License
 
 This project is licensed under the [MIT License](LICENSE).
-Free to use, share, and modify!
+Free to use, share, and modify.
 
 ---
 
 ## 💡 Tip
 
-> Set your workflow to **active** to run it automatically.
-> You’ll never miss a birthday again – and your wishes will always be on time! 🥳
+Set your workflow to **active** to run it automatically.
+You’ll never miss a birthday again – and your wishes will always be on time.
 
 ---
 
 ## ✨ Built With
 
 Created by \[M.Thiruvarankan]
-🔗 Powered by [n8n.io](https://n8n.io), [OpenRouter.ai](https://openrouter.ai), and [Telegram Bot API](https://core.telegram.org/bots/api)
+Powered by [n8n.io](https://n8n.io), [OpenRouter.ai](https://openrouter.ai), and [Telegram Bot API](https://core.telegram.org/bots/api)
+
+```
 
