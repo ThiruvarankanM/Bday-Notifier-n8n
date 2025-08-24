@@ -133,6 +133,5 @@ You’ll never miss a birthday again – and your wishes will always be on time.
 
 Created by \[M.Thiruvarankan]
 Powered by [n8n.io](https://n8n.io), [OpenRouter.ai](https://openrouter.ai), and [Telegram Bot API](https://core.telegram.org/bots/api)
-
 ```
 
